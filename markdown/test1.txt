@@ -1,0 +1,19 @@
+model new
+zone creat brick size 3 3 3 
+zone face skin
+zone cmodel assign elastic 
+zone property bulk 3e8 shear 1e8
+zone initialize density 2000
+zone gridpoint fix velocity-z range position-z -.1 .1
+zone gridpoint fix velocity-x range position-x -.1 .1
+zone gridpoint fix velocity-x range position-x 2.9 3.1
+zone gridpoint fix velocity-y range position-y -.1 .1
+zone gridpoint fix velocity-y range position-y 2.9 3.1
+model gravity 0 0 -10
+model slove
+model save '1.f3sav'
+zone face apply stress-normal -10e4 range position-z 3 ...
+    position-x 1 2 position-y 1 2
+zone history displacement-z position 1 1 3
+model slove
+model save '2.f3sav'
